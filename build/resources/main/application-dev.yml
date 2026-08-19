@@ -1,0 +1,18 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: ${DB_URL:jdbc:Altibase://localhost:20300/mydb}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    driver-class-name: Altibase.jdbc.driver.AltibaseDriver
+    hikari:
+      connection-test-query: SELECT 1 FROM DUAL
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        dialect: org.hibernate.community.dialect.AltibaseDialect
+    show-sql: false

@@ -1,0 +1,30 @@
+# 로컬 개발용 Altibase A+ Edition (무료 · 라이선스 불필요)
+# 이미지: altibase/a_plus_edition  (Altibase 7.3 기반, 부팅 시 "Server is Altibase A+ Edition")
+#
+# 실행:   docker compose up -d
+# 종료:   docker compose down          (데이터 유지)
+# 초기화:  docker compose down -v       (볼륨까지 삭제 후 새로 시작)
+#
+# 접속 정보
+#   host: localhost   port: 20300
+#   user: sys         password: manager   DB명: mydb
+services:
+  altibase:
+    image: altibase/a_plus_edition:latest
+    platform: linux/amd64              # Apple Silicon(M칩)에서 x86 이미지 실행용
+    container_name: altibase-local
+    environment:
+      MODE: foreground                 # ALTIBASE 기동 + 터미널 유지 (첫 실행 시 DB 자동 생성)
+    stdin_open: true                   # docker run 의 -i
+    tty: true                          # docker run 의 -t  (foreground 모드가 터미널을 잡고 있어야 유지됨)
+    ports:
+      - "20300:20300"                  # JDBC 접속 포트
+    volumes:
+      # 이 이미지의 ALTIBASE_HOME 은 /root/altibase_home 이다 (/home/altibase 아님).
+      - aplus-dbs:/root/altibase_home/dbs     # 데이터 파일 (새 볼륨)
+      - aplus-logs:/root/altibase_home/logs   # 로그 파일 (새 볼륨)
+    restart: unless-stopped
+
+volumes:
+  aplus-dbs:
+  aplus-logs:

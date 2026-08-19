@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(gradle --version)",
+      "Bash(java --version)",
+      "Bash(/usr/libexec/java_home -V)",
+      "Bash(npm --version)",
+      "Bash(docker --version)",
+      "Bash(docker info *)",
+      "Bash(brew --version)",
+      "WebSearch",
+      "WebFetch(domain:hub.docker.com)"
+    ]
+  }
+}

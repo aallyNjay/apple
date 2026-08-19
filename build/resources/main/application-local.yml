@@ -1,0 +1,20 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:Altibase://localhost:20300/mydb
+    username: ${DB_USERNAME:SYS}
+    password: ${DB_PASSWORD:MANAGER}
+    driver-class-name: Altibase.jdbc.driver.AltibaseDriver
+    hikari:
+      # Altibase Open Edition(7.1) JDBC 드라이버는 JDBC4 의 Connection.isValid() 를
+      # 구현하지 않아 HikariCP 가 커넥션 검증에 실패한다. 검증 쿼리로 대체한다.
+      connection-test-query: SELECT 1 FROM DUAL
+  jpa:
+    hibernate:
+      ddl-auto: update   # local 전용. dev/운영에서는 validate 권장
+    properties:
+      hibernate:
+        dialect: org.hibernate.community.dialect.AltibaseDialect
+    show-sql: true
