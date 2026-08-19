@@ -28,3 +28,17 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+
+### Gradle ###
+.gradle/
+build/
+
+### IntelliJ project files ###
+.idea/
+*.iml
+
+### TypeScript build info ###
+*.tsbuildinfo
+
+### Claude Code local settings ###
+.claude/settings.local.json
